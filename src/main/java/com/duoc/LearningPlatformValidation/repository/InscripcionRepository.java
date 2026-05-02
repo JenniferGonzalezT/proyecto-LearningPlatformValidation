@@ -11,6 +11,9 @@ public interface InscripcionRepository extends JpaRepository<Inscripcion, Long> 
     // Consultar inscripciones por curso
     List<Inscripcion> findByCursoId(Long cursoId);
 
+    // Consultar inscripciones por estudiante
+    List<Inscripcion> findByEstudianteId(Long estudianteId);
+
     // Verificar si el estudiante ya está en el curso
     boolean existsByEstudianteIdAndCursoId(Long estudianteId, Long cursoId);
 }

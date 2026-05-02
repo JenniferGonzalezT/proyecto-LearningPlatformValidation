@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  oracle-xe:
+    image: gvenzl/oracle-xe:21-slim-faststart
+    container_name: oracle-learning-platform
+    environment:
+      ORACLE_PASSWORD: oracle123
+      ORACLE_ALLOW_REMOTE: true
+    ports:
+      - "1521:1521"
+      - "5500:5500"
+    volumes:
+      - oracle_data:/opt/oracle/oradata
+    healthcheck:
+      test: ["CMD", "sqlplus", "-L", "system/oracle123@localhost:1521/xepdb1"]
+      interval: 20s
+      timeout: 10s
+      retries: 30
+      start_period: 180s
+    networks:
+      - learning-platform-network
+
+  spring-app:
+    build: .
+    container_name: learning-platform-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:oracle:thin:@//oracle-xe:1521/xepdb1
+      SPRING_DATASOURCE_USERNAME: system
+      SPRING_DATASOURCE_PASSWORD: oracle123
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    ports:
+      - "8080:8080"
+    depends_on:
+      oracle-xe:
+        condition: service_healthy
+    networks:
+      - learning-platform-network
+
+volumes:
+  oracle_data:
+    driver: local
+
+networks:
+  learning-platform-network:
+    driver: bridge
