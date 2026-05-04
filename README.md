@@ -2,7 +2,7 @@
 
 ## Descripción del Proyecto
 
-Este proyecto implementa una **plataforma de aprendizaje en línea** utilizando Spring Boot 3.3.5 con arquitectura de capas. El sistema gestiona cursos, usuarios, inscripciones y evaluaciones a través de microservicios REST conectados a una base de datos Oracle.
+Este proyecto implementa una **plataforma de aprendizaje en línea** utilizando Spring Boot 4.0.6 con arquitectura de capas. El sistema gestiona cursos, usuarios, inscripciones y evaluaciones a través de microservicios REST conectados a una base de datos Oracle.
 
 ---
 
@@ -395,7 +395,7 @@ src/main/resources/
 
 ## Tecnologías Utilizadas
 
-- **Spring Boot**: 3.3.5
+- **Spring Boot**: 4.0.6 (se decide utilizar una versión más actualizada y segura que la solicitada)
 - **Spring Data JPA**: Acceso a datos
 - **Hibernate**: ORM
 - **Oracle Database**: Base de datos
